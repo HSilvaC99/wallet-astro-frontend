@@ -1,0 +1,17 @@
+---
+const { id, placeholder, type } = Astro.props;
+---
+
+<div>
+  <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900">
+    <slot />
+  </label>
+  <input
+    id={id}
+    name={id}
+    placeholder={placeholder}
+    type={type}
+    class="bg-white border shadow-md border-light_hover text-gray-900 text-sm rounded-lg min-w-full p-2.5 dark:bg-light dark:border-gray-500 dark:placeholder-gray-400 dark:text-white opacity-80 focus:opacity-100 transition-transform focus:scale-105 hover:opacity-100"
+  />
+  required
+</div>

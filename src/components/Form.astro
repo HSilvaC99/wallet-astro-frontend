@@ -1,0 +1,11 @@
+---
+import FormField from "./FormField.astro";
+---
+
+<form action="post" class="flex flex-col items-center max-w-96 min-w-full">
+  <FormField id="payee_address" placeholder="0xa9fdef78..." type="text">
+    Dirección del receptor
+  </FormField>
+
+  <FormField id="" placeholder="0.00" type="number"> Monto a enviar </FormField>
+</form>

@@ -1,0 +1,45 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import GitHub from "@icons/GitHub.astro";
+import NavBar from "@/components/NavBar.astro";
+import { getSession } from "auth-astro/server";
+import { Auth } from "auth-astro/components";
+
+const session = await getSession(Astro.request);
+---
+
+<Layout title="Escrow transactions">
+  <main>
+    <div class="flex flex-col place-items-center text-center">
+      <Auth>
+        {
+          session ? (
+            <NavBar />
+            <div class="p-8 sm:ml-24 md:ml-52">
+              <slot />
+            </div>
+          ) : (
+            <button
+              id="signin"
+              class="mt-80 text-white bg-[#24292F] hover:bg-[#24292F]/90 focus:ring-4 focus:outline-none focus:ring-[#24292F]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-gray-500 dark:hover:bg-[#050708]/30 me-2 mb-2"
+            >
+              <GitHub />
+              Inicia sesión con GitHub
+            </button>
+          )
+        }
+      </Auth>
+    </div>
+  </main>
+</Layout>
+
+<script>
+  const { signIn, signOut } = await import("auth-astro/client");
+  const signinButton = document.getElementById("signin");
+  const signoutButton = document.getElementById("signout");
+
+  if (signinButton)
+    signinButton.addEventListener("click", () => signIn("github"));
+  else if (signoutButton)
+    signoutButton.addEventListener("click", () => signOut());
+</script>
